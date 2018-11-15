@@ -7,6 +7,12 @@
 			<ref name="MILP RS piecewise.dat" type="data">
 			</ref>
 		</config>
+		<config default="false" name="setting 2" category="opl">
+			<ref name="MILP sS.mod" type="model">
+			</ref>
+			<ref name="MILP sS.dat" type="data">
+			</ref>
+		</config>
 	</configs>
 	
 </project>
