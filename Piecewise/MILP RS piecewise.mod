@@ -38,7 +38,7 @@ subject to{
  stockhlb[0]==maxl(stock[0],0);
  stockplb[0]==maxl(-stock[0],0);
  
- //purchase[1]==1; // x[1] can be zero
+ //purchase[1]==0; // x[1] can be zero
 
  forall(t in months) 
    		purchase[t] == 0 => stock[t]+meandemand[t]-stock[t-1] == 0;     

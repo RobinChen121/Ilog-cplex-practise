@@ -15,7 +15,7 @@ maximize piecewise(i in 1..n)
 
 
 subject to{
-	x == 250;
+	x == 100;
 }
 
 
