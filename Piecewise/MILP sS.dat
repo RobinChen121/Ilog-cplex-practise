@@ -3,12 +3,13 @@
  * Author: Administrator
  * Creation Date: 2018年11月13日 at 上午11:26:48
  *********************************************/
-nbmonths=2;
+nbmonths=4;
 fc=100;
 h=1;
 p=10;
-meandemand=[60, 40];
-std_demand=[15, 10];
+v = 0;
+meandemand=[20, 40, 60, 40];
+std_demand=[5, 10, 15, 10];
 initialstock=0;
 
 /* Use an even number of partitions */

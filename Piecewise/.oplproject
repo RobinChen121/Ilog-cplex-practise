@@ -13,6 +13,12 @@
 			<ref name="MILP sS.dat" type="data">
 			</ref>
 		</config>
+		<config default="false" name="setting3" category="opl">
+			<ref name="original sS.dat" type="data">
+			</ref>
+			<ref name="original sS.mod" type="model">
+			</ref>
+		</config>
 	</configs>
 	
 </project>

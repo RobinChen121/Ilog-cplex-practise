@@ -63,14 +63,17 @@ forall(t in months, p in partitions)
 
   forall(t in months) stockhlb[t] >= (sum(j in 1..t) error*std_matrix[j][t]*P[j][t]);
 
-///**
-//* Piecewise-based formulation (requires an even number of partitions: ftoi(round(nbpartitions/2)) )
-//*/
-//forall(t in months, j in 1..t) 
-//  P[j][t] == 1 => stockhlb[t]/std_matrix[j][t] == 
-//  piecewise(i in partitions) {((sum(k in 1..i) prob[k]) - prob[i]) -> means[i]; 1} 
-//  (0, error - sum(k in 1..ftoi(round(nbpartitions/2)))(prob[k]*means[k])) 
-//  (stock[t]/std_matrix[j][t]);
+/**
+* Piecewise-based formulation (requires an even number of partitions: ftoi(round(nbpartitions/2)) )
+* 
+* inside is standard normal distribution
+* S = stock[t] + meand, S - meand= stock[t]
+*/
+forall(t in months, j in 1..t) 
+  P[j][t] == 1 => stockhlb[t]/std_matrix[j][t] == 
+  piecewise(i in partitions) {((sum(k in 1..i) prob[k]) - prob[i]) -> means[i]; 1} 
+  (0, error - sum(k in 1..ftoi(round(nbpartitions/2)))(prob[k]*means[k])) 
+  (stock[t]/std_matrix[j][t]);
     
 /**
 * Original formulation as in (Rossi et al., 2015)    
@@ -83,10 +86,11 @@ forall(t in months, p in partitions)
  
 /**
 * Piecewise-based formulation (requires an even number of partitions: ftoi(round(nbpartitions/2)) )
+* slop need minus 1
 */  
-//forall(t in months, j in 1..t) 
-//  P[j][t] == 1 => stockplb[t]/std_matrix[j][t] == 
-//  piecewise(i in partitions) {(- 1 + (sum(k in 1..i) prob[k]) - prob[i]) -> means[i]; 0} 
-//  (0, error - sum(k in 1..ftoi(round(nbpartitions/2)))(prob[k]*means[k])) 
-//  (stock[t]/std_matrix[j][t]); 
+forall(t in months, j in 1..t) 
+  P[j][t] == 1 => stockplb[t]/std_matrix[j][t] == 
+  piecewise(i in partitions) {(- 1 + (sum(k in 1..i) prob[k]) - prob[i]) -> means[i]; 0} 
+  (0, error - sum(k in 1..ftoi(round(nbpartitions/2)))(prob[k]*means[k])) 
+  (stock[t]/std_matrix[j][t]); 
 }
